@@ -2,7 +2,7 @@
 Asp web api  
 # Ejecución
 --
-- En la carpeta **ApiEmployee** se encuentra la slución **ApiEmployee.sln** se recomienda usar Visual Studio 2019
+- En la carpeta **ApiEmployee** se encuentra la solución **ApiEmployee.sln** se recomienda usar Visual Studio 2019
 - Modificar la cadena de conexión `PostgreSqlDBContext` del archivo **ApiEmployee/appsettings.json**
 
 - Ejecutar el siguiente script en su motor de base de datos **postgresql** para crear la base de datos y su respectiva tabla.
