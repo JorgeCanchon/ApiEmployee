@@ -6,6 +6,7 @@ Asp web api
 
 - Ejecutar el siguiente script en su motor de base de datos **postgresql** para crear la base de datos y su respectiva tabla.
 
+```postgres
 create database dbemployee
 
 create table employee(
@@ -27,4 +28,5 @@ values('Jorge Canchon', 'developer')
 
 insert into employee (fullname, position, fk_employee)
 values('Jorge Canchon', 'scrum master', 1)
+```
 
