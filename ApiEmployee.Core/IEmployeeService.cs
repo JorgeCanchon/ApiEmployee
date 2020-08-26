@@ -12,8 +12,8 @@ namespace ApiEmployee.Services
     {
         IEnumerable<EmployeeViewModel> GetAllEmployees();
         IEnumerable<EmployeeViewModel> GetAllBoss();
-        bool InsertEmployees(EmployeeViewModel employee);
+        long InsertEmployees(EmployeeViewModel employee);
         bool UpdateEmployees(EmployeeViewModel employee);
-        bool DeleteEmployee(int id);
+        bool DeleteEmployee(long id);
     }
 }

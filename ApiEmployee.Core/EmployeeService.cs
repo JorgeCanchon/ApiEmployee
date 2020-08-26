@@ -1,6 +1,7 @@
 ﻿using ApiEmployee.DataAccess;
 using ApiEmployee.DataContrats;
 using ApiEmployee.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,19 +25,28 @@ namespace ApiEmployee.Core
         {
             return _employeeRepository.FindByCondition(x => x.IsBoss).ToList();
         }
-        public bool InsertEmployees(EmployeeViewModel employee)
+
+        public long InsertEmployees(EmployeeViewModel employee)
         {
-             _employeeRepository.Create(employee);
-            return true;
-        }
-        public bool UpdateEmployees(EmployeeViewModel employee)
-        {
-            return true;
+            var entity = _employeeRepository.Create(employee);
+            return entity.IdEmployee;
         }
 
-        public bool DeleteEmployee(int id)
+        public bool UpdateEmployees(EmployeeViewModel employee)
         {
-            return true;
+            var result = _employeeRepository.Update(employee, "IdEmployee");
+            return result == EntityState.Modified;
+        }
+
+        public bool DeleteEmployee(long id)
+        {
+            EmployeeViewModel product = _employeeRepository.FindByCondition(x => x.IdEmployee == id).FirstOrDefault();
+            if (product != null)
+            {
+                var result = _employeeRepository.Delete(product);
+                return result == EntityState.Deleted;
+            }
+            return false;
         }
     }
 }

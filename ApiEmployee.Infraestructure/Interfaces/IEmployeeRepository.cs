@@ -9,7 +9,6 @@ namespace ApiEmployee.DataAccess
 {
     public interface IEmployeeRepository : IRepositoryBase<EmployeeViewModel>
     {
-        //IQueryable<EmployeeViewModel> GetAllEmployees();
-       // IQueryable<EmployeeViewModel> GetAllBoss();
+
     }
 }

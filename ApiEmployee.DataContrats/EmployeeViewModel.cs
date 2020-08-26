@@ -8,10 +8,6 @@ namespace ApiEmployee.DataContrats
 	[Table("employee")]
 	public partial class EmployeeViewModel
 	{
-		public EmployeeViewModel()
-		{
-			//Bosses = new HashSet<EmployeeViewModel>();
-		}
 		[Key]
 		[Column("pk_employee")]
 		public long IdEmployee { get; set; }
@@ -25,6 +21,5 @@ namespace ApiEmployee.DataContrats
 		public bool IsBoss { get; set; }
 		[Column("fhcreated")]
 		public DateTime FHcreated { get; set; }
-		//public ICollection<EmployeeViewModel> Bosses { get; set; }
 	}
 }
