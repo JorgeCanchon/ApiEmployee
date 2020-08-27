@@ -10,9 +10,10 @@ namespace ApiEmployee.Services
 {
     public interface IEmployeeService
     {
+        IEnumerable<EmployeeViewModel> GetAll();
         IEnumerable<EmployeeViewModel> GetAllEmployees();
         IEnumerable<EmployeeViewModel> GetAllBoss();
-        long InsertEmployees(EmployeeViewModel employee);
+        EmployeeViewModel InsertEmployees(EmployeeViewModel employee);
         bool UpdateEmployees(EmployeeViewModel employee);
         bool DeleteEmployee(long id);
     }
