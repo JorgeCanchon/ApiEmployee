@@ -27,7 +27,7 @@ namespace ApiEmployee.Controllers
         {
             try
             {
-                IEnumerable<EmployeeViewModel> employees = _employeeService.GetAllEmployees();
+                IEnumerable<EmployeeViewModel> employees = _employeeService.GetAll();
                 if (employees.Any())
                     return Ok(employees);
                 return NoContent();
@@ -59,8 +59,14 @@ namespace ApiEmployee.Controllers
         {
             try
             {
-                long result = _employeeService.InsertEmployees(employee);
-                if (result > 0)
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                EmployeeViewModel result = _employeeService.InsertEmployees(employee);
+                if (result != null && result.IdEmployee > 0)
+                    return Ok(result);
+                else if (result != null && result.IdEmployee == -1)
                     return StatusCode(201);
                 return StatusCode(500);
             }

@@ -29,8 +29,8 @@ namespace ApiEmployee
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
-            
             services.AddDbContext<RepositoryContext>(
                    options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSqlDBContext"), npgsqlOptions => {
                        npgsqlOptions.CommandTimeout(60);
@@ -47,6 +47,14 @@ namespace ApiEmployee
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x =>
+            {
+                x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
 
             app.UseHttpsRedirection();
 

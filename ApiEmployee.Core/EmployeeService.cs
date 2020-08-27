@@ -26,10 +26,14 @@ namespace ApiEmployee.Core
             return _employeeRepository.FindByCondition(x => x.IsBoss).ToList();
         }
 
-        public long InsertEmployees(EmployeeViewModel employee)
+        public EmployeeViewModel InsertEmployees(EmployeeViewModel employee)
         {
-            var entity = _employeeRepository.Create(employee);
-            return entity.IdEmployee;
+            EmployeeViewModel employeeView = _employeeRepository.FindByCondition(x => x.FullName == employee.FullName).FirstOrDefault();
+            if (employeeView == null)
+            {
+                return _employeeRepository.Create(employee);
+            }
+            return new EmployeeViewModel { IdEmployee = -1};
         }
 
         public bool UpdateEmployees(EmployeeViewModel employee)
@@ -40,13 +44,16 @@ namespace ApiEmployee.Core
 
         public bool DeleteEmployee(long id)
         {
-            EmployeeViewModel product = _employeeRepository.FindByCondition(x => x.IdEmployee == id).FirstOrDefault();
-            if (product != null)
+            EmployeeViewModel employee = _employeeRepository.FindByCondition(x => x.IdEmployee == id).FirstOrDefault();
+            if (employee != null)
             {
-                var result = _employeeRepository.Delete(product);
+                var result = _employeeRepository.Delete(employee);
                 return result == EntityState.Deleted;
             }
             return false;
         }
+
+        public IEnumerable<EmployeeViewModel> GetAll() =>
+            _employeeRepository.FindAll();
     }
 }
